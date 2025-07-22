@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights Bakery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946;
+            --secondary: #f1faee;
+            --accent: #a8dadc;
+            --dark: #1d3557;
+            --light: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 5%;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            font-size: 1.5rem;
+            color: var(--dark);
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff');
+            background-size: cover;
+            background-position: center;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Pastry Grid */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 5%;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .pastry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .pastry-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .pastry-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .pastry-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .pastry-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .pastry-card:hover .pastry-img img {
+            transform: scale(1.1);
+        }
+        
+        .pastry-info {
+            padding: 1.5rem;
+        }
+        
+        .pastry-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .pastry-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .pastry-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pastry-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .add-to-cart {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background: #457b9d;
+            color: white;
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .cart-content {
+            background: white;
+            max-width: 600px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+        
+        .close-cart:hover {
+            color: var(--dark);
+        }
+        
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+        }
+        
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: #eee;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity {
+            margin: 0 0.5rem;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .remove-item {
+            background: none;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        
+        .remove-item:hover {
+            color: var(--primary);
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-align: center;
+        }
+        
+        .checkout-btn:hover {
+            background: #c1121f;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Email Modal */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .email-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+        }
+        
+        .email-content h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .email-input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .cart-content {
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-birthday-cake"></i>
+                OWEN Pastries
+            </a>
+            <div class="cart-icon" id="cartIcon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Delicious Handcrafted Pastries</h1>
+            <p>Freshly baked daily with love and the finest ingredients</p>
+            <a href="#pastries" class="btn">Order Now</a>
+        </div>
+    </section>
+
+    <!-- Pastry Grid -->
+    <div class="container" id="pastries">
+        <h2 class="section-title">Our Delicious Pastries</h2>
+        <div class="pastry-grid" id="pastryGrid">
+            <!-- Dynamically loaded -->
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h3 class="cart-title">Your Order</h3>
+                <button class="close-cart" id="closeCart">&times;</button>
+            </div>
+            <div class="cart-items" id="cartItems">
+                <!-- Dynamically loaded -->
+            </div>
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Total:</span>
+                    <span id="cartTotal">₦0.00</span>
+                </div>
+                <button class="checkout-btn" id="checkoutBtn">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Modal -->
+    <div class="email-modal" id="emailModal">
+        <div class="email-content">
+            <h3>Enter Your Email</h3>
+            <p>We'll send your payment receipt to this email</p>
+            <input type="email" id="customerEmail" class="email-input" placeholder="your@email.com" required>
+            <button class="btn" id="confirmEmailBtn">Continue to Payment</button>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <a href="#" class="whatsapp-btn" id="whatsappBtn">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // ==============================================
+        // CONFIGURATION
+        // ==============================================
+        const CONFIG = {
+            whatsappNumber: '2348127459846', // Your WhatsApp number with country code
+            paystackTestKey: 'pk_test_71d220e5fd848c18440c04f724fbb94d8716cd98' // Your Paystack test key
+        };
+
+        // ==============================================
+        // APP DATA
+        // ==============================================
+        const pastries = [
+            {
+                id: 1,
+                name: "Chocolate Croissant",
+                description: "Flaky croissant with rich chocolate filling",
+                price: 1200,
+                image: "https://images.unsplash.com/photo-1589010588553-46e8e7c21788"
+            },
+            {
+                id: 2,
+                name: "Red Velvet Cupcake",
+                description: "Moist red velvet cake with cream cheese frosting",
+                price: 800,
+                image: "https://images.unsplash.com/photo-1614707267537-b85aaf00c4b7"
+            },
+            {
+                id: 3,
+                name: "Fruit Tart",
+                description: "Buttery crust with vanilla custard and fresh fruits",
+                price: 1500,
+                image: "https://images.unsplash.com/photo-1563729782294-df27d96f04a7"
+            },
+            {
+                id: 4,
+                name: "Cinnamon Roll",
+                description: "Soft dough with cinnamon sugar and cream cheese glaze",
+                price: 1000,
+                image: "https://images.unsplash.com/photo-1558315956-db5f6a7e9e2e"
+            }
+        ];
+
+        // ==============================================
+        // APP STATE
+        // ==============================================
+        let cart = [];
+        let currentOrder = {
+            id: null,
+            customerEmail: null
+        };
+
+        // ==============================================
+        // DOM ELEMENTS
+        // ==============================================
+        const dom = {
+            pastryGrid: document.getElementById('pastryGrid'),
+            cartIcon: document.getElementById('cartIcon'),
+            cartCount: document.getElementById('cartCount'),
+            cartModal: document.getElementById('cartModal'),
+            closeCart: document.getElementById('closeCart'),
+            cartItems: document.getElementById('cartItems'),
+            cartTotal: document.getElementById('cartTotal'),
+            checkoutBtn: document.getElementById('checkoutBtn'),
+            whatsappBtn: document.getElementById('whatsappBtn'),
+            emailModal: document.getElementById('emailModal'),
+            customerEmail: document.getElementById('customerEmail'),
+            confirmEmailBtn: document.getElementById('confirmEmailBtn')
+        };
+
+        // ==============================================
+        // INITIALIZATION
+        // ==============================================
+        function init() {
+            renderPastries();
+            setupEventListeners();
+            loadPaystack();
+        }
+
+        // ==============================================
+        // RENDER FUNCTIONS
+        // ==============================================
+        function renderPastries() {
+            dom.pastryGrid.innerHTML = pastries.map(pastry => `
+                <div class="pastry-card">
+                    <div class="pastry-img">
+                        <img src="${pastry.image}" alt="${pastry.name}">
+                    </div>
+                    <div class="pastry-info">
+                        <h3 class="pastry-title">${pastry.name}</h3>
+                        <p class="pastry-desc">${pastry.description}</p>
+                        <div class="pastry-footer">
+                            <span class="pastry-price">₦${pastry.price.toLocaleString()}</span>
+                            <button class="add-to-cart" data-id="${pastry.id}">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCartItems() {
+            if (cart.length === 0) {
+                dom.cartItems.innerHTML = '<p style="padding: 2rem; text-align: center;">Your cart is empty</p>';
+                dom.cartTotal.textContent = '₦0.00';
+                return;
+            }
+
+            dom.cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-img">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-title">${item.name}</h4>
+                        <p class="cart-item-price">₦${item.price.toLocaleString()}</p>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                            <span class="quantity">${item.quantity}</span>
+                            <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                        </div>
+                        <button class="remove-item" data-id="${item.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Calculate total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            dom.cartTotal.textContent = `₦${total.toLocaleString()}`;
+
+            // Add event listeners to dynamic elements
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    updateQuantity(id, -1);
+                });
+            });
+
+            document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.getAttribute('data-id'));
+                    updateQuantity(id, 1);
+                });
+            });
+
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.closest('button').getAttribute('data-id'));
+                    removeFromCart(id);
+                });
+            });
+        }
+
+        // ==============================================
+        // EVENT HANDLERS
+        // ==============================================
+        function setupEventListeners() {
+            // Add to cart buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-to-cart')) {
+                    const pastryId = parseInt(e.target.getAttribute('data-id'));
+                    addToCart(pastryId);
+                }
+            });
+
+            // Cart icon click
+            dom.cartIcon.addEventListener('click', () => {
+                dom.cartModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                renderCartItems();
+            });
+
+            // Close cart
+            dom.closeCart.addEventListener('click', closeCartModal);
+
+            // Close when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === dom.cartModal) {
+                    closeCartModal();
+                }
+            });
+
+            // Checkout button
+            dom.checkoutBtn.addEventListener('click', handleCheckout);
+
+            // WhatsApp button
+            dom.whatsappBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=Hello%20Sweet%20Delights!`, '_blank');
+            });
+
+            // Email confirmation
+            dom.confirmEmailBtn.addEventListener('click', () => {
+                const email = dom.customerEmail.value.trim();
+                if (!email || !email.includes('@')) {
+                    alert('Please enter a valid email address');
+                    return;
+                }
+                currentOrder.customerEmail = email;
+                dom.emailModal.style.display = 'none';
+                confirmOrderViaWhatsApp();
+            });
+        }
+
+        // ==============================================
+        // CART FUNCTIONS
+        // ==============================================
+        function addToCart(pastryId) {
+            const pastry = pastries.find(p => p.id === pastryId);
+            const existingItem = cart.find(item => item.id === pastryId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ ...pastry, quantity: 1 });
+            }
+
+            updateCartCount();
+            showToast(`${pastry.name} added to cart!`);
+        }
+
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            dom.cartCount.textContent = totalItems;
+        }
+
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (!item) return;
+
+            item.quantity += change;
+            if (item.quantity <= 0) {
+                cart = cart.filter(item => item.id !== id);
+            }
+
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function closeCartModal() {
+            dom.cartModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // ==============================================
+        // CHECKOUT PROCESS
+        // ==============================================
+        async function handleCheckout() {
+            if (cart.length === 0) {
+                showToast('Your cart is empty!');
+                return;
+            }
+
+            // Generate order ID
+            currentOrder.id = 'ORD-' + Date.now();
+
+            // Show email modal
+            dom.emailModal.style.display = 'flex';
+            dom.customerEmail.value = '';
+        }
+
+        function confirmOrderViaWhatsApp() {
+            return new Promise((resolve) => {
+                const orderSummary = generateOrderSummary();
+                const total = calculateTotal();
+                
+                const whatsappMessage = `Hello Sweet Delights! I'd like to confirm my order (${currentOrder.id}):%0A%0A${orderSummary}%0A%0ATotal: ₦${total.toLocaleString()}%0A%0APlease confirm availability.`;
+                
+                window.open(`https://wa.me/${CONFIG.whatsappNumber}?text=${whatsappMessage}`, '_blank');
+                
+                // In a real app, you'd wait for WhatsApp confirmation
+                // For demo, we'll proceed after a short delay
+                setTimeout(() => {
+                    initializePaystackPayment();
+                    resolve(true);
+                }, 1000);
+            });
+        }
+
+        function generateOrderSummary() {
+            return cart.map(item => 
+                `${item.name} x${item.quantity} - ₦${(item.price * item.quantity).toLocaleString()}`
+            ).join('%0A');
+        }
+
+        function calculateTotal() {
+            return cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        }
+
+        // ==============================================
+        // PAYSTACK INTEGRATION
+        // ==============================================
+        function initializePaystackPayment() {
+            // Validate we have required data
+            if (!currentOrder.customerEmail) {
+                showToast('Please provide your email address');
+                return;
+            }
+
+            const amount = calculateTotal() * 100; // Convert to kobo
+            if (amount < 2500) { // Minimum amount (₦25)
+                showToast('Minimum order amount is ₦25');
+                return;
+            }
+
+            const handler = PaystackPop.setup({
+                key: CONFIG.paystackTestKey,
+                email: currentOrder.customerEmail,
+                amount: amount,
+                currency: 'NGN',
+                ref: 'PAY_' + Date.now(),
+                metadata: {
+                    custom_fields: [
+                        {
+                            display_name: "Order ID",
+                            variable_name: "order_id",
+                            value: currentOrder.id
+                        }
+                    ]
+                },
+                callback: function(response) {
+                    // Payment successful
+                    showToast('Payment successful! Reference: ' + response.reference);
+                    cart = [];
+                    updateCartCount();
+                    closeCartModal();
+                },
+                onClose: function() {
+                    showToast('Payment window closed - you can complete payment later');
+                }
+            });
+            
+            handler.openIframe();
+        }
+
+        // ==============================================
+        // UTILITY FUNCTIONS
+        // ==============================================
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = 'var(--dark)';
+            toast.style.color = 'white';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '5px';
+            toast.style.zIndex = '1000';
+            toast.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            toast.textContent = message;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        function loadPaystack() {
+            const script = document.createElement('script');
+            script.src = 'https://js.paystack.co/v1/inline.js';
+            document.body.appendChild(script);
+        }
+
+        // Initialize the app
+        window.onload = init;
+    </script>
+</body>
+</html>
